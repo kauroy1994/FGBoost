@@ -1,5 +1,7 @@
 from math import exp
 from TILDE import TILDE
+from random import sample
+from copy import deepcopy
 
 def sigmoid(x):
     """returns e^x/(1+e^x)
@@ -39,12 +41,17 @@ class GBoost(object):
             #create TILDE(R) tree object
             tree_i = TILDE(typ="regression",score="WV",max_depth=self.max_depth)
 
+            #subsample negatives if too many for each tree
+            sampled_neg = deepcopy(self.neg)
+            if len(self.neg) > 2*len(self.pos):
+                sampled_neg = sample(self.neg,2*len(self.pos))
+
             #compute gradients as I-P
             for ex in self.examples:
                 p = sigmoid(self.examples[ex])
                 if ex in self.pos:
                     gradients[ex] = 1-p
-                elif ex in self.neg:
+                elif ex in sampled_neg:
                     gradients[ex] = 0-p
 
             #fit tree on gradients
@@ -73,4 +80,3 @@ class GBoost(object):
             example_values.append(sigmoid(example_value))
 
         return example_values
-    
