@@ -1,7 +1,7 @@
 # FGBoost
 Implements functional gradient boosted classification based on the work:
 
-**Natarajan, Sriraam, et al. "Gradient-based boosting for statistical relational learning: The relational dependency network case." Machine Learning 86.1 (2012): 25-56.**
+**Natarajan, Sriraam, et al. Boosted statistical relational learners: From benchmarks to data-driven medicine. Springer, 2015.**
 
 run and read comments from main_boost.py for detailed working
 
