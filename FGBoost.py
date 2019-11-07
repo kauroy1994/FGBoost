@@ -60,7 +60,7 @@ class GBoost(object):
             #recompute example values as previous example value + tree_i value
             for ex in self.examples:
                 tree_i_value = tree_i.infer(self.data,ex)
-                self.examples[ex] += tree_i_value
+                self.examples[ex] += 0.01*tree_i_value
 
             #add tree to boosted_trees
             self.boosted_trees.append(tree_i)
